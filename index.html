@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>เกมทายตัวเลข</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            text-align: center;
+            padding-top: 50px;
+        }
+        .box {
+            background: #fff;
+            width: 300px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input {
+            padding: 10px;
+            font-size: 18px;
+            width: 100px;
+            text-align: center;
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        p {
+            font-size: 18px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <h2>เกมทายตัวเลข (1 - 100)</h2>
+        <input type="number" id="guess" placeholder="พิมพ์ตัวเลข">
+        <br>
+        <button onclick="check()">ทาย!</button>
+        <button onclick="resetGame()">เริ่มใหม่</button>
+        <p id="result"></p>
+        <p>จำนวนครั้งที่ทาย: <span id="attempts">0</span></p>
+    </div>
+
+    <script>
+        let answer; // ตัวเลขที่เราต้องการให้ทาย
+        let attempts = 0; // จำนวนครั้งที่ทาย
+
+        // ฟังก์ชันเริ่มใหม่
+        function resetGame() {
+            // สุ่มตัวเลขใหม่
+            answer = Math.floor(Math.random() * 100) + 1;
+            // รีเซ็ตค่าทุกอย่าง
+            document.getElementById("guess").value = '';
+            document.getElementById("result").textContent = '';
+            attempts = 0;
+            document.getElementById("attempts").textContent = attempts;
+        }
+
+        // เริ่มเกม
+        resetGame();
+
+        // ฟังก์ชันทายตัวเลข
+        function check() {
+            let guess = Number(document.getElementById("guess").value);
+            let result = document.getElementById("result");
+
+            if (!guess) {
+                result.textContent = "กรุณาพิมพ์ตัวเลขก่อน!";
+                return;
+            }
+
+            attempts++; // เพิ่มจำนวนครั้งที่ทาย
+            document.getElementById("attempts").textContent = attempts;
+
+            if (guess > answer) {
+                result.textContent = "น้อยกว่านี้!";
+            } else if (guess < answer) {
+                result.textContent = "มากกว่านี้!";
+            } else {
+                result.textContent = "ถูกต้อง! 🎉";
+            }
+        }
+    </script>
+
+</body>
+</html>
