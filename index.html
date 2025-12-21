@@ -1,0 +1,39 @@
+<script>
+    let answer;
+    let attempts = 0;
+
+    function resetGame() {
+        answer = Math.floor(Math.random() * 100) + 1;
+        document.getElementById("guess").value = '';
+        document.getElementById("result").textContent = '';
+        attempts = 0;
+        document.getElementById("attempts").textContent = attempts;
+    }
+
+    resetGame();
+
+    function check() {
+        let guessInput = document.getElementById("guess");
+        let guess = Number(guessInput.value);
+        let result = document.getElementById("result");
+
+        if (!guess) {
+            result.textContent = "กรุณาพิมพ์ตัวเลขก่อน!";
+            return;
+        }
+
+        attempts++;
+        document.getElementById("attempts").textContent = attempts;
+
+        if (guess > answer) {
+            result.textContent = "น้อยกว่านี้!";
+        } else if (guess < answer) {
+            result.textContent = "มากกว่านี้!";
+        } else {
+            result.textContent = "ถูกต้อง! 🎉";
+        }
+
+        // ⭐ ทำให้เลขที่พิมพ์หายไป
+        guessInput.value = "";
+    }
+</script>
